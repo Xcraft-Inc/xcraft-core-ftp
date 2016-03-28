@@ -1,0 +1,25 @@
+{
+  "name": "xcraft-core-ftp",
+  "version": "0.1.0",
+  "description": "Xcraft ftp helpers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "xcraft",
+    "helpers",
+    "ftp"
+  ],
+  "repository": {
+    "type": "file",
+    "url": "lib/xcraft-core-ftp"
+  },
+  "author": "Mathieu Schroeter",
+  "license": "MIT",
+  "dependencies": {
+    "ftp": "^0.3.10",
+    "xcraft-core-fs": "0.1.0"
+  },
+  "devDependencies": {}
+}
