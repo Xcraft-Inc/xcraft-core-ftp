@@ -28,28 +28,27 @@ exports.get = function (urlObj, outputFile, callback, callbackProgress) {
           return;
         }
 
-        stream.once ('close', function () {
-          c.end ();
-        });
-
         stream
-        .on ('data', function (data) {
-          if (!callbackProgress) {
-            return;
-          }
+          .once ('close', function () {
+            c.end ();
+          })
+          .on ('data', function (data) {
+            if (!callbackProgress) {
+              return;
+            }
 
-          progress += data.length;
-          callbackProgress (progress, total);
-        })
-        .on ('error', callback)
-        .pipe (file)
-        .on ('finish', function () {
-          /* HACK: see xHttp. */
-          const fd = fs.openSync (outputFile, 'r');
-          fs.closeSync (fd);
+            progress += data.length;
+            callbackProgress (progress, total);
+          })
+          .on ('error', callback)
+          .pipe (file)
+          .on ('finish', function () {
+            /* HACK: see xHttp. */
+            const fd = fs.openSync (outputFile, 'r');
+            fs.closeSync (fd);
 
-          callback ();
-        });
+            callback ();
+          });
       });
     });
   });
