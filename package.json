@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "ftp": "^0.3.10",
-    "watt": "git+https://github.com/mappum/watt.git",
+    "watt": "^3.2.2",
     "xcraft-core-fs": "0.1.0"
   },
   "devDependencies": {}
