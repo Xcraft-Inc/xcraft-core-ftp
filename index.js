@@ -1,17 +1,16 @@
 'use strict';
 
-const fs   = require ('fs');
+const fs = require ('fs');
 const path = require ('path');
 const watt = require ('watt');
-
 
 function download (ftp, urlObj, outputFile, callback, callbackProgress) {
   let progress = 0;
 
   const file = fs.createWriteStream (outputFile);
 
-  watt (function * (next) {
-    const total  = yield ftp.size (urlObj.pathname, next);
+  watt (function* (next) {
+    const total = yield ftp.size (urlObj.pathname, next);
     const stream = yield ftp.get (urlObj.pathname, next);
 
     yield new Promise ((resolve, reject) => {
@@ -52,6 +51,6 @@ exports.get = function (urlObj, outputFile, callback, callbackProgress) {
   });
 
   ftp.connect ({
-    host: urlObj.hostname
+    host: urlObj.hostname,
   });
 };
