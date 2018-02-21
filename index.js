@@ -1,56 +1,56 @@
 'use strict';
 
-const fs = require ('fs');
-const path = require ('path');
-const watt = require ('watt');
+const fs = require('fs');
+const path = require('path');
+const watt = require('watt');
 
-function download (ftp, urlObj, outputFile, callback, callbackProgress) {
+function download(ftp, urlObj, outputFile, callback, callbackProgress) {
   let progress = 0;
 
-  const file = fs.createWriteStream (outputFile);
+  const file = fs.createWriteStream(outputFile);
 
-  watt (function* (next) {
-    const total = yield ftp.size (urlObj.pathname, next);
-    const stream = yield ftp.get (urlObj.pathname, next);
+  watt(function*(next) {
+    const total = yield ftp.size(urlObj.pathname, next);
+    const stream = yield ftp.get(urlObj.pathname, next);
 
-    yield new Promise ((resolve, reject) => {
+    yield new Promise((resolve, reject) => {
       stream
-        .once ('close', function () {
-          ftp.end ();
+        .once('close', function() {
+          ftp.end();
         })
-        .on ('data', function (data) {
+        .on('data', function(data) {
           if (!callbackProgress) {
             return;
           }
 
           progress += data.length;
-          callbackProgress (progress, total);
+          callbackProgress(progress, total);
         })
-        .on ('error', reject)
-        .pipe (file)
-        .on ('finish', function () {
+        .on('error', reject)
+        .pipe(file)
+        .on('finish', function() {
           /* HACK: see xHttp. */
-          const fd = fs.openSync (outputFile, 'r');
-          fs.closeSync (fd);
-          resolve ();
+          const fd = fs.openSync(outputFile, 'r');
+          fs.closeSync(fd);
+          resolve();
         });
     });
-  }) (callback);
+  })(callback);
 }
 
-exports.get = function (urlObj, outputFile, callback, callbackProgress) {
-  const xFs = require ('xcraft-core-fs');
-  const Ftp = require ('ftp');
+exports.get = function(urlObj, outputFile, callback, callbackProgress) {
+  const xFs = require('xcraft-core-fs');
+  const Ftp = require('ftp');
 
-  xFs.mkdir (path.dirname (outputFile));
+  xFs.mkdir(path.dirname(outputFile));
 
-  const ftp = new Ftp ();
+  const ftp = new Ftp();
 
-  ftp.on ('ready', () => {
-    download (ftp, urlObj, outputFile, callback, callbackProgress);
+  ftp.on('ready', () => {
+    download(ftp, urlObj, outputFile, callback, callbackProgress);
   });
 
-  ftp.connect ({
+  ftp.connect({
     host: urlObj.hostname,
   });
 };
