@@ -9,11 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "xcraft",
-    "helpers",
-    "ftp"
-  ],
+  "keywords": ["xcraft", "helpers", "ftp"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Xcraft-Inc/xcraft-core-ftp.git"
@@ -30,6 +26,6 @@
   },
   "homepage": "https://github.com/Xcraft-Inc/xcraft-core-ftp#readme",
   "devDependencies": {
-    "xcraft-dev-rules": "^0.2.0"
+    "xcraft-dev-rules": "^0.3.0"
   }
 }
