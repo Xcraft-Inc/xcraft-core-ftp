@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const watt = require('watt');
+const watt = require('gigawatts');
 
 function download(ftp, urlObj, outputFile, callback, callbackProgress) {
   let progress = 0;
