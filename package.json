@@ -9,7 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["xcraft", "helpers", "ftp"],
+  "keywords": [
+    "xcraft",
+    "helpers",
+    "ftp"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Xcraft-Inc/xcraft-core-ftp.git"
@@ -19,13 +23,16 @@
   "dependencies": {
     "ftp": "^0.3.10",
     "gigawatts": "^4.0.5",
-    "xcraft-core-fs": "^1.0.0"
+    "xcraft-core-fs": "^2.0.0"
   },
   "bugs": {
     "url": "https://github.com/Xcraft-Inc/xcraft-core-ftp/issues"
   },
   "homepage": "https://github.com/Xcraft-Inc/xcraft-core-ftp#readme",
   "devDependencies": {
-    "xcraft-dev-rules": "^0.4.0"
-  }
+    "prettier": "1.18.2",
+    "xcraft-dev-prettier": "^1.0.0",
+    "xcraft-dev-rules": "^1.0.2"
+  },
+  "prettier": "xcraft-dev-prettier"
 }
