@@ -1,6 +1,6 @@
 {
   "name": "xcraft-core-ftp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Xcraft ftp helpers",
   "main": "index.js",
   "engines": {
