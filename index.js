@@ -9,16 +9,16 @@ function download(ftp, urlObj, outputFile, callback, callbackProgress) {
 
   const file = fs.createWriteStream(outputFile);
 
-  watt(function*(next) {
+  watt(function* (next) {
     const total = yield ftp.size(urlObj.pathname, next);
     const stream = yield ftp.get(urlObj.pathname, next);
 
     yield new Promise((resolve, reject) => {
       stream
-        .once('close', function() {
+        .once('close', function () {
           ftp.end();
         })
-        .on('data', function(data) {
+        .on('data', function (data) {
           if (!callbackProgress) {
             return;
           }
@@ -28,7 +28,7 @@ function download(ftp, urlObj, outputFile, callback, callbackProgress) {
         })
         .on('error', reject)
         .pipe(file)
-        .on('finish', function() {
+        .on('finish', function () {
           /* HACK: see xHttp. */
           const fd = fs.openSync(outputFile, 'r');
           fs.closeSync(fd);
@@ -38,7 +38,7 @@ function download(ftp, urlObj, outputFile, callback, callbackProgress) {
   })(callback);
 }
 
-exports.get = function(urlObj, outputFile, callback, callbackProgress) {
+exports.get = function (urlObj, outputFile, callback, callbackProgress) {
   const xFs = require('xcraft-core-fs');
   const Ftp = require('ftp');
 
