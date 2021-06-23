@@ -54,3 +54,18 @@ exports.get = function (urlObj, outputFile, callback, callbackProgress) {
     host: urlObj.hostname,
   });
 };
+
+exports.size = watt(function* (urlObj, next) {
+  const Ftp = require('ftp');
+
+  const ftp = new Ftp();
+  ftp.on('ready', next.parallel());
+  ftp.connect({host: urlObj.hostname});
+  yield next.sync();
+
+  try {
+    return yield ftp.size(urlObj.pathname, next);
+  } finally {
+    ftp.end();
+  }
+});
